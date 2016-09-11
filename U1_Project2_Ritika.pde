@@ -56,10 +56,19 @@ boolean movement1 = false;
 boolean movement2 = false;
 boolean movement3 = false;
 
+//This statement is to move the background to void setup at the end so there is no background erasing the circles
+boolean end = true;
+
 void setup()
 {
 //size of the screen
   fullScreen ();
+
+//When this is false, the background will be drawn in void setup, so all of the circles will be shown
+  if(end==false)
+  {
+    background(100,36,76);
+  }
 }
 
 void draw()
@@ -67,10 +76,13 @@ void draw()
 //The next 2 lines link to my other voids, so that they draw
   dist ();
   Boundaries ();
-  background (100,36,76);
-
-//The color of my background
   
+//Until the end, the background will be drawn in void draw erasing all of the previous circles
+  if(end==true)
+  {
+//The color of my background    
+    background (100,36,76);
+  }
   
 //A white circle 
   noStroke();
@@ -81,18 +93,18 @@ void draw()
   fill (0);
   ellipse (x2,y2,50,50);
   
-//The speed of my first circle
+//The speed of my first circle (white)
   x1 = x1 + speedx1;
   y1 = y1 + speedy1;
   
-//The speed of my second circle
+//The speed of my second circle (black)
   x2 = x2 + speedx2;
   y2 = y2 + speedy2;
   
-//What happens when the first and second circle collide
+//What happens when the first and second circle collide (white and black)
   if (dist (x1,y1,x2,y2) < 50)
   {
-//This will run both booleans once the first 2 circles collide
+//This will run all these booleans once the first white and black collide
     background1 = true;
     circle1 = true;
     movement1 = true;
@@ -107,10 +119,10 @@ void draw()
     ellipse(x4,y4,50,50);
   }
 
-//When the background statement is true, draw 2 circles
+//When the background statement is true, continuously draw 2 circles at random locations
   if (background1==true)
   {
-//These 2 circles will keep popping up in the background, it will keep reading until circle = false    
+//These 2 circles will keep popping up in the background (random locations), it will keep reading until circle = false    
     fill(0);
     ellipse(random(width),random(height),random(30,50),random(30,50));
     fill(225);
@@ -120,19 +132,19 @@ void draw()
 //Enables circles 3 and 4 to move  
   if(movement1 == true)
   {
-//The speed of my third circle
+//The speed of my third circle (blue)
     x3 = x3 + speedx3;
     y3 = y3 + speedy3;
 
-//The speed of my fourth circle
+//The speed of my fourth circle (pink)
     x4 = x4 + speedx4;
     y4 = y4 + speedy4;
   }
   
-//What happens when the third and fourth circle collide
+//What happens when the third and fourth circle collide (blue and pink)
   if (dist (x3,y3,x4,y4) < 50)
   {
-//This will run both booleans once the first 2 circles collide
+//This will run all these booleans once the first 2 circles collide
     background2 = true;
     circle2 = true;
     movement2 = true;
@@ -147,7 +159,7 @@ void draw()
     ellipse(x6,y6,50,50);
   }
 
-//When the background statement is true, draw 2 circles
+//When the background statement is true, continuously draw 2 circles at random locations
   if (background2==true)
   {
 //These 2 circles will keep popping up in the background, it will keep reading until circle = false    
@@ -159,21 +171,22 @@ void draw()
   
   if (movement2==true)
   {
-//The speed of my fifth circle
+//The speed of my fifth circle (orange)
     x5 = x5 + speedx5;
     y5 = y5 + speedy5;
 
-//The speed of my sixth circle
+//The speed of my sixth circle (green)
     x6 = x6 + speedx6;
     y6 = y6 + speedy6;
   }
-//What happens when the fifth and sixth circle collide
+//What happens when the fifth and sixth circle collide (orange and green)
   if (dist (x5,y5,x6,y6) < 50)
   {
-//This will run both booleans once the first 2 circles collide
+//This will run all these booleans once the first 2 circles collide
     background3 = true;
     circle3 = true;
     movement3 = true;
+    end = false;
   }
   
 //Creates 2 new circles
@@ -185,7 +198,7 @@ void draw()
     ellipse(x8,y8,50,50);
   }
 
-//When the background statement is true, draw 2 circles
+//When the background statement is true, continuously draw 2 circles at random locations
   if (background3==true)
   {
 //These 2 circles will keep popping up in the background, it will keep reading until circle = false    
@@ -208,7 +221,7 @@ void Boundaries ()
 //When the x position of the circle is off the screen to the left, the speed will become positive making it go forwards
   if (x1 <= 0)
   {
-//makes the speed faster
+//changes speed
     speedx1 = 12;
   }
 
@@ -221,7 +234,7 @@ void Boundaries ()
 //When the y position of the circle is off the screen to the top, the speed will become positive making it go down
   if (y1 <= 0)
   {
-//makes the speed slower    
+//changes speed    
     speedy1 = 6;
   }
 
@@ -233,7 +246,7 @@ void Boundaries ()
   
   if (x2 < 0)
   {
-//makes the speed faster
+//changes speed
     speedx2 = 12;
   }
   
@@ -244,7 +257,7 @@ void Boundaries ()
   
   if (y2 <= 0)
   {
-//makes the speed slower
+//changes speed
     speedy2 = 6;
   }
   
@@ -257,7 +270,7 @@ void Boundaries ()
 //When the x position of the circle is off the screen to the left, the speed will become positive making it go forwards
   if (x3 <= 0)
   {
-//makes the speed faster
+//changes speed
     speedx3 = 12;
   }
 
@@ -270,7 +283,7 @@ void Boundaries ()
 //When the y position of the circle is off the screen to the top, the speed will become positive making it go down
   if (y3 <= 0)
   {
-//makes the speed slower    
+//changes speed    
     speedy3 = 6;
   }
 
@@ -282,7 +295,7 @@ void Boundaries ()
   
   if (x4 < 0)
   {
-//makes the speed faster
+//changes speed
     speedx4 = 12;
   }
   
@@ -293,9 +306,10 @@ void Boundaries ()
   
   if (y4 <= 0)
   {
- //makes the speed slower
+//changes speed
     speedy4 = 6;
   }
+
 //When the x position of the circle is off the screen to the right, the speed will become negative making it go backwards
   if (x5 > width)
   {
@@ -305,7 +319,7 @@ void Boundaries ()
 //When the x position of the circle is off the screen to the left, the speed will become positive making it go forwards
   if (x5 <= 0)
   {
-//makes the speed faster
+//changes speed
     speedx5 = 12;
   }
 
@@ -318,7 +332,7 @@ void Boundaries ()
 //When the y position of the circle is off the screen to the top, the speed will become positive making it go down
   if (y5 <= 0)
   {
-//makes the speed slower    
+//changes speed    
     speedy5 = 6;
   }
 
@@ -330,7 +344,7 @@ void Boundaries ()
   
   if (x6 < 0)
   {
-//makes the speed faster
+//changes speed
     speedx6 = 12;
   }
   
@@ -341,7 +355,7 @@ void Boundaries ()
   
   if (y6 <= 0)
   {
-//makes the speed slower
+//changes speed
     speedy6 = 6;
   }
 }
@@ -349,21 +363,23 @@ void Boundaries ()
 //Collisions
 void dist ()
 {
-//If the two circles collide
+//If the two circles collide (white and black)
   if (dist (x1,y1,x2,y2) < 50)
   {
 //Make them both go back in the direction they came from. Making it look like they repel   
     speedx1 = -speedx1;
     speedx2 = -speedx2; 
   }
-  
+
+//If these two circles collide (blue and pink)
   if (dist (x3,y3,x4,y4) < 50)
   {
 //Make them both go back in the direction they came from. Making it look like they repel   
     speedx3 = -speedx3;
     speedx4 = -speedx4;
   }
-  
+
+//If these two circles collide (green and orange)
   if (dist (x5,y5,x6,y6) < 50)
   {
 //Make them both go back in the direction they came from. Making it look like they repel   
