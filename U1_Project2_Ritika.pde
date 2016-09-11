@@ -3,22 +3,22 @@
 
 */
 
-
-
 //These are my x and y coordinates for my 2 circles
-float x1 = random(width);
-float y1 = random(height);
-float x2 = random(width);
-float y2 = random(height);
+float x1 = 100;
+float y1 = 100;
+float x2 = 1150;
+float y2 = 700;
 
 //These are my x and y speeds for the 2 circles
-float speedx1 = 9;
-float speedx2 = -9;
-float speedy1 = 9;
-float speedy2 = -9;
+float speedx1 = random(20);
+float speedx2 = random(20);
+float speedy1 = random(20);
+float speedy2 = random(20);
 
-//This is a true or false statement which draws a circle
-boolean circle = false;
+//This is a true or false statement which creates a background with flashing circles
+boolean background1 = false;
+//This is a true or false statement which draws 2 more circles
+boolean circle1 = false;
 
 void setup()
 {
@@ -38,27 +38,38 @@ void draw()
 //A white circle 
   fill (225);
   ellipse (x1,y1,50,50);
-
+  
 //The speed of my first circle
   x1 = x1 + speedx1;
   y1 = y1 + speedy1;
-  
+
 //A black circle
   fill (0);
   ellipse (x2,y2,50,50);
-  
+
 //The speed of my second circle
   x2 = x2 + speedx2;
   y2 = y2 + speedy2;
-
+  
 //If they collide then the circle statement is true
   if (dist (x1,y1,x2,y2) < 50)
   {
-    circle = true;
+//This will run both booleans once the first 2 circles collide
+    background1 = true;
+    circle1 = true;
+  }
+  
+//Creates 2 new circles
+  if (circle1==true)
+  {
+    fill (54,205,245);
+    ellipse(100,100,50,50);
+    fill (247,72,166);
+    ellipse(150,100,50,50);
   }
 
-//When the circle statement is true, draw 2 circles
-  if (circle==true)
+//When the background statement is true, draw 2 circles
+  if (background1==true)
   {
 //These 2 circles will keep popping up in the background, it will keep reading until circle = false    
     fill(0);
@@ -130,5 +141,5 @@ void dist ()
 //Make them both go back in the direction they came from. Making it look like they repel   
     speedx1 = -speedx1;
     speedx2 = -speedx2;
-  }  
+  }
 }
