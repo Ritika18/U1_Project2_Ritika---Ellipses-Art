@@ -3,11 +3,13 @@
 
 */
 
+
+
 //These are my x and y coordinates for my 2 circles
-float x1 = 20;
-float y1 = 300;
-float x2 = 680;
-float y2 = 300;
+float x1 = random(width);
+float y1 = random(height);
+float x2 = random(width);
+float y2 = random(height);
 
 //These are my x and y speeds for the 2 circles
 float speedx1 = 9;
@@ -15,10 +17,13 @@ float speedx2 = -9;
 float speedy1 = 9;
 float speedy2 = -9;
 
+//This is a true or false statement which draws a circle
+boolean circle = false;
+
 void setup()
 {
 //size of the screen
-  size (700,650);
+  fullScreen ();
 }
 
 void draw()
@@ -45,7 +50,22 @@ void draw()
 //The speed of my second circle
   x2 = x2 + speedx2;
   y2 = y2 + speedy2;
-  
+
+//If they collide then the circle statement is true
+  if (dist (x1,y1,x2,y2) < 50)
+  {
+    circle = true;
+  }
+
+//When the circle statement is true, draw 2 circles
+  if (circle==true)
+  {
+//These 2 circles will keep popping up in the background, it will keep reading until circle = false    
+    fill(0);
+    ellipse(random(width),random(height),50,50);
+    fill(225);
+    ellipse(random(width),random(height),50,50);
+  }
 }
 
 //Making sure that the 2 circles don't go off of the screen
